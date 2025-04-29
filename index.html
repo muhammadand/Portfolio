@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Patrix, Bootstrap 5 Landing Page</title>
+    <title>Muhammad Andi - Portfolio</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -48,14 +48,56 @@
                             START SECTION 2 - THE INTRO SECTION  
 /////////////////////////////////////////////////////////////////////////////////////////////////////-->
 
-<<section id="home" class="intro-section">
+<section id="home" class="intro-section">
   <div class="max-w-screen-xl mx-auto px-8">
     <div class="container">
       <div class="row align-items-center text-white">
         <!-- START THE CONTENT FOR THE INTRO  -->
         <div class="col-md-6 intros text-start">
           <h1 class="display-2">
-            <span class="display-2--intro">Hey!, I'm Muhammad Andi</span>
+            <span class="display-2--intro" style="font-size: 4rem; font-weight: 700; color: white;">
+              Hey!, <span id="typing-text" style="white-space: pre-line;"></span><span id="cursor" style="border-right: 2px solid white; display: inline-block;"></span>
+            </span>
+            
+            <script>
+              const text = "I'm Muhammad\nAndi"; // Pakai \n untuk baris baru
+              const typingElement = document.getElementById("typing-text");
+              const cursor = document.getElementById("cursor");
+            
+              let index = 0;
+              let isDeleting = false;
+            
+              function type() {
+                // Replace newline with actual line break
+                const displayText = text.slice(0, index).replace(/\n/g, "\n");
+                typingElement.textContent = displayText;
+            
+                if (!isDeleting && index <= text.length) {
+                  index++;
+                } else if (isDeleting && index >= 0) {
+                  index--;
+                }
+            
+                if (index > text.length) {
+                  isDeleting = true;
+                  setTimeout(type, 1000);
+                } else if (index < 0) {
+                  isDeleting = false;
+                  setTimeout(type, 500);
+                } else {
+                  setTimeout(type, isDeleting ? 80 : 120);
+                }
+              }
+            
+              type();
+            
+              // Cursor blinking effect
+              setInterval(() => {
+                cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+              }, 500);
+            </script>
+            
+            
             <span class="display-2--description lh-base">
               a passionate web developer who loves crafting clean, responsive, and user-friendly websites using modern technologies. Here, you’ll find a selection of my projects, skills, and ways to get in touch.
             </span>
@@ -289,6 +331,9 @@
                               START SECTION 7 - THE PORTFOLIO  
 //////////////////////////////////////////////////////////////////////////////////////////////////////-->
 
+
+
+  
 <section id="portfolio" class="portfolio">
   <div class="container">
     <div class="row text-center mt-5">
@@ -301,117 +346,170 @@
     <!-- FILTER BUTTONS  -->
     <div class="row mt-5 mb-4 g-3 text-center">
       <div class="col-md-12">
-        <button class="btn btn-outline-primary" type="button">All</button>
+
         <button class="btn btn-outline-primary" type="button">websites</button>
-        <button class="btn btn-outline-primary" type="button">design</button>
-        <button class="btn btn-outline-primary" type="button">mockup</button>
+
       </div>
     </div>
+<!-- Modal Bootstrap (gambar utama dinamis) -->
+<div class="modal fade" id="portfolioModal" tabindex="-1" aria-labelledby="portfolioModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content shadow-lg rounded-4">
 
-    <!-- START THE PORTFOLIO ITEMS  -->
-    <div class="row">
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-1.jpg" alt="portfolio 1 image" title="portfolio 1 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 1</h4>
-              <p>category project</p>
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold fs-3" id="portfolioModalLabel">Project Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Gambar utama -->
+        <div class="mb-4">
+          <img id="portfolioMainImage" src="" alt="Main Portfolio Image" class="img-fluid rounded-3 w-100">
+        </div>
+
+        <!-- Deskripsi project -->
+        <div class="mb-4">
+          <p id="portfolioModalDescription" class="text-muted fs-5">Project description will appear here.</p>
+        </div>
+
+        <!-- Gallery tambahan -->
+        <div id="portfolioModalImages" class="row g-3">
+          <!-- Nanti diisi via JS -->
+        </div>
+
+      </div>
+
+      <div class="modal-footer border-0 pt-0">
+        <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Tutup</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Script tambahan -->
+<script>
+  // Data portfolio
+  const portfolioData = [
+    {
+      img: "images/portfolio/Ecommerce.png",
+      alt: "portfolio 1 image",
+      title: "E-commerce Buket Demei.id",
+      category: "Website",
+      description: "Buket Demei.id adalah platform e-commerce eksklusif untuk pembelian buket bunga secara online, dirancang dengan performa tinggi menggunakan framework Laravel. Website ini menawarkan pengalaman berbelanja yang elegan dan intuitif, lengkap dengan integrasi payment gateway untuk transaksi yang aman dan cepat. Dilengkapi fitur katalog dinamis, sistem pemesanan real-time, notifikasi otomatis, hingga personalisasi produk, Buket Demei.id menghadirkan kemudahan memilih dan mengirimkan buket terbaik hanya dengan beberapa klik. Tampilan modern dan responsif memastikan pengalaman optimal di semua perangkat.",
+      gallery: [
+        "images/portfolio/Ecommerce.png",
+        "images/portfolio/Ecommerce2.png",
+        "images/portfolio/Ecommerce3.png"
+      ]
+    },
+    {
+  img: "images/portfolio/apotek.png",
+  alt: "portfolio apotek image",
+  title: "Sistem Manajemen Apotek Modern: Kasir, Payment Gateway, dan Smart Inventory",
+  category: "Website",
+  description: "Sistem Informasi Manajemen Apotek revolusioner yang mengintegrasikan metode Weighted Moving Average (WMA) untuk peramalan stok dan Reorder Point (ROP) untuk pengendalian persediaan. Dilengkapi fitur kasir responsif, integrasi payment gateway untuk transaksi cepat dan aman, sistem pembelian-penjualan real-time, serta laporan dinamis yang bisa diakses kapan saja. Solusi cerdas ini membantu meningkatkan efisiensi operasional apotek, mengoptimalkan stok, mempercepat pelayanan pelanggan, dan memaksimalkan profitabilitas dengan tampilan modern dan UX/UI yang intuitif.",
+  gallery: [
+    "images/portfolio/apotek1.png",
+    "images/portfolio/apotek2.png",
+    "images/portfolio/apotek3.png"
+  ]
+},
+
+    {
+      img: "images/portfolio/c45utama.png",
+      alt: "portfolio 3 image",
+      title: "Project Data Mining C45",
+      category: "Website",
+      description: "Sebuah sistem cerdas berbasis algoritma C4.5 untuk menganalisis dan menentukan kelayakan kredit rumah di Tsuraya Properti, membantu perusahaan membuat keputusan kredit dengan lebih cepat, akurat, dan berbasis data.",
+      gallery: [
+        "images/portfolio/c451.png",
+        "images/portfolio/c452.png",
+        "images/portfolio/c453.png"
+      ]
+    },
+    {
+  img: "images/portfolio/learning.png",
+  alt: "portfolio 3 image",
+  title: "Project Data Mining C45",
+  category: "Website",
+  description: "Platform E-Learning inovatif untuk mahasiswa, dosen, prodi, dan akademik, dirancang untuk mendukung proses pembelajaran modern. Fitur unggulan meliputi manajemen RPS, rubrik penilaian dinamis, laporan kinerja, kursus interaktif, monitoring progres mahasiswa secara real-time, serta pembuatan course yang fleksibel dan mudah digunakan. Solusi sempurna untuk meningkatkan efektivitas dan kualitas pendidikan berbasis digital.",
+  gallery: [
+    "images/portfolio/learning1.png",
+    "images/portfolio/learning2.png",
+    "images/portfolio/learning3.png"
+  ]
+}
+
+  ];
+
+  // Fungsi render portfolio di halaman utama
+  function renderPortfolioItems() {
+    const portfolioContainer = document.getElementById('portfolio-items');
+    portfolioContainer.innerHTML = '';
+
+    portfolioData.forEach((item, index) => {
+      const portfolioItem = `
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="portfolio-box shadow rounded overflow-hidden" onclick="openModal(${index})" style="cursor:pointer;">
+            <img src="${item.img}" alt="${item.alt}" title="${item.title}" class="img-fluid">
+            <div class="portfolio-info p-3">
+              <h5 class="mb-1">${item.title}</h5>
+              <small class="text-muted">${item.category}</small>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-2.jpg" alt="portfolio 2 image" title="portfolio 2 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 2</h4>
-              <p>category project</p>
-            </div>
+      `;
+      portfolioContainer.innerHTML += portfolioItem;
+    });
+  }
+
+  // Fungsi buka modal
+  function openModal(index) {
+    const item = portfolioData[index];
+    
+    document.getElementById('portfolioModalLabel').innerText = item.title;
+    document.getElementById('portfolioModalDescription').innerText = item.description;
+    document.getElementById('portfolioMainImage').src = item.img;
+    document.getElementById('portfolioMainImage').alt = item.alt;
+
+    const galleryContainer = document.getElementById('portfolioModalImages');
+    galleryContainer.innerHTML = '';
+
+    if (item.gallery.length > 0) {
+      item.gallery.forEach(img => {
+        galleryContainer.innerHTML += `
+          <div class="col-md-4">
+            <img src="${img}" alt="Gallery Image" class="img-fluid rounded-3">
           </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-3.jpg" alt="portfolio 3 image" title="portfolio 3 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 3</h4>
-              <p>category project</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-4.jpg" alt="portfolio 4 image" title="portfolio 4 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 4</h4>
-              <p>category project</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-5.jpg" alt="portfolio 5 image" title="portfolio 5 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 5</h4>
-              <p>category project</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-6.jpg" alt="portfolio 6 image" title="portfolio 6 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 6</h4>
-              <p>category project</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-7.jpg" alt="portfolio 7 image" title="portfolio 7 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 7</h4>
-              <p>category project</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-8.jpg" alt="portfolio 8 image" title="portfolio 8 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 8</h4>
-              <p>category project</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="portfolio-box shadow">
-          <img src="images/portfolio/portfolio-9.jpg" alt="portfolio 9 image" title="portfolio 9 picture" class="img-fluid">
-          <div class="portfolio-info">
-            <div class="caption">
-              <h4>project name goes here 9</h4>
-              <p>category project</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        `;
+      });
+    } else {
+      galleryContainer.innerHTML = '<p class="text-muted">No additional images.</p>';
+    }
+
+    // Tampilkan modal
+    const modal = new bootstrap.Modal(document.getElementById('portfolioModal'));
+    modal.show();
+  }
+
+  // Jalankan saat halaman siap
+  document.addEventListener('DOMContentLoaded', renderPortfolioItems);
+</script>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div id="portfolio-items" class="row">
+ 
     </div>
   </div>
 </section>
+
+
+
+
 
 <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////
               START SECTION 8 - GET STARTED  
